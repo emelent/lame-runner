@@ -23,10 +23,10 @@ lame.GameState = class GameState{
 
 	update(){
 		if(this.player1.distance_shifted === 0){
-			if(this.cursors.left.justPressed()){
+			if(this.cursors.left.justPressed() && this.player1.canShift(-1)){
 				this.player1.shift_direction = -1
 				this.player2.shift_direction = 1
-			}else if(this.cursors.right.justPressed()){
+			}else if(this.cursors.right.justPressed() && this.player1.canShift(1)){
 				this.player1.shift_direction = 1
 				this.player2.shift_direction = -1
 			}

@@ -14,18 +14,22 @@ class Player extends Entity{
 		this.SHIFT_SPEED = 500
 		this.distance_shifted = 0
 		this.shift_direction = 0
+		this.shift_position = 0
 	}
 
+	canShift(direction){
+		return  this.shift_position !== direction
+	}
+	
 	shift(){
 		this.body.velocity.x = this.SHIFT_SPEED * this.shift_direction
 		this.distance_shifted += Math.abs(this.body.velocity.x)
 
 		if(this.distance_shifted >= this.SHIFT_DIST){
 			this.distance_shifted = 0
+			this.shift_position += this.shift_direction
 			this.shift_direction = 0
 			this.body.velocity.x = 0
-		}else if(this.shift_direction !== 0){
-			console.log('shifting')
 		}
 	}
 	
