@@ -1,10 +1,14 @@
 class Player extends Entity{
-	constructor(...args){
-		super(...args)
+	constructor(context, pos, props){
+		super(context, pos, props)
 
 		this.frame = 0
-		this.scale.setTo(1)
+		const scale = 1
+		this.scale.setTo(scale, scale * props.direction)
 		this.anchor.setTo(0.5)
+
+		this.animations.add('run', [0,1,2,3,4,5], 12, true)
+		this.animations.play('run')
 
 		// add le physics
 		this.game.physics.arcade.enable(this)

@@ -53,14 +53,16 @@ lame.GameState = class GameState{
 			y: this.game.world.height
 		}
 		const p1Props = {
-			texture: 'temp',
+			texture: 'player',
 			initial_frame: 0,
-			group: 'players'
+			group: 'players',
+			direction: -1
 		}
 		const p2Props = {
-			texture: 'temp',
+			texture: 'player',
 			initial_frame: 1,
-			group: 'players'
+			group: 'players',
+			direction: 1
 		}
 
 		this.player1 = new Player(this, p1StartPos, p1Props)
@@ -69,7 +71,7 @@ lame.GameState = class GameState{
 	}
 
 	createCover(){
-		const cover = this.game.add.sprite(0, 300, 'temp')
+		const cover = this.game.add.sprite(0, this.game.world.height / 2, 'temp')
 		cover.frame = 5
 		cover.scale.setTo(50, 4)
 		cover.anchor.setTo(0, 0.5)

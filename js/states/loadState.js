@@ -18,6 +18,12 @@ lame.LoadState = class LoadState{
 			'./assets/images/temp.png', 
 			16, 16
 		)
+		this.load.spritesheet(
+			'player',
+			'./assets/images/player.png', 
+			64, 80
+		)
+
 
 		// LOAD SOME SOUNDS
 		this.load.audio('collect', 'assets/sounds/pickup.wav')
