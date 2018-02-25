@@ -16,7 +16,7 @@ lame.GameState = class GameState{
 		this.createGroups()
 
 		this.road_width = 150
-		this.obstacle_speed = 200
+		this.obstacle_speed = 300
 
 		this.createSideWalk()
 		this.createStripes()
