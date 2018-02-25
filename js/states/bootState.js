@@ -15,7 +15,7 @@ lame.BootState = class BootState{
 	}
 
 	create(){
-		this.game.stage.backgroundColor = '#000'
+		this.game.stage.backgroundColor = '#333'
 
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
 		this.scale.pageAlignVertically = true

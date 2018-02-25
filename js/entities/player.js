@@ -14,7 +14,7 @@ class Player extends Entity{
 		this.game.physics.arcade.enable(this)
 		this.body.collideWorldBounds = true
 
-		this.SHIFT_DIST = 15000
+		this.SHIFT_DIST = 10000
 		this.SHIFT_SPEED = 500
 		this.distance_shifted = 0
 		this.shift_direction = 0
@@ -39,6 +39,14 @@ class Player extends Entity{
 	
 	update(){
 		this.shift()
+
+		this.game.physics.arcade.overlap(
+			this,
+			this.context.groups.traps,
+			this.hitTrap,
+			null,
+			this
+		)
 	}
 
 	collectItem(player, item){
@@ -46,7 +54,9 @@ class Player extends Entity{
 		item.activateEffect(player)
 	}
 
-	hitEnemy(player, enemy){
-		console.log('colliding with the enemy')
+	hitTrap(player, trap){
+		this.animations.stop()
+		this.context.gameOver()
+		trap.kill()
 	}
 }

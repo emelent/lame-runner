@@ -4,6 +4,7 @@
 		"background",
 		"items",
 		"enemies",
+		"bullets",
 		"players",
 		"traps"
 	]
