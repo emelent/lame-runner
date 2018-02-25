@@ -17,8 +17,8 @@ lame.GameState = class GameState{
 		this.createGroups()
 
 		this.road_width = 150
-		this.obstacle_speed = 200
-		this.stripe_speed = 200
+		this.obstacle_speed = 300
+		this.stripe_speed = 320
 
 		this.counter = setInterval(() => {
 			this.score++
@@ -34,10 +34,10 @@ lame.GameState = class GameState{
 
 	update(){
 		if(this.player1.distance_shifted === 0){
-			if(this.cursors.left.justPressed() && this.player1.canShift(1)){
+			if(this.cursors.left.isDown && this.player1.canShift(1)){
 				this.player1.shift_direction = 1
 				this.player2.shift_direction = -1
-			}else if(this.cursors.right.justPressed() && this.player1.canShift(-1)){
+			}else if(this.cursors.right.isDown && this.player1.canShift(-1)){
 				this.player1.shift_direction = -1
 				this.player2.shift_direction = 1
 			}
@@ -45,41 +45,6 @@ lame.GameState = class GameState{
 	}
 
 	// CUSTOM METHODS
-	createObstacles2(){
-		const x = this.game.world.width / 2
-		const y = this.game.world.height / 2
-		const delta = 150
-
-		let {obs1, obs2} = this.generateObstacles()
-		let obs1Positions = obs1.map(v => ({
-			x: x + (delta * v),
-			y
-		}))
-		let obs2Positions = obs2.map(v => ({
-			x: x + (delta * v),
-			y: y + 50
-		}))
-
-		const props1 = {
-			texture: 'temp',
-			initial_frame: 0,
-			group: 'traps',
-			speed: 200,
-			direction: -1
-		}
-		const props2 = Object.assign({}, props1, {direction: 1})
-
-		this.obstacles = []
-		obs1Positions.forEach(pos => {
-			const obj = new Obstacle(this, pos, props1)
-			this.obstacles.push(obj)
-		})
-		obs2Positions.forEach(pos => {
-			const obj = new Obstacle(this, pos, props2)
-			this.obstacles.push(obj)
-		})
-	}
-
 	createObstacles(){
 		const pos = {x: 0,y: 0}
 		const props = {

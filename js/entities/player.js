@@ -22,7 +22,8 @@ class Player extends Entity{
 	}
 
 	canShift(direction){
-		return  this.shift_position !== direction
+		return (this.shift_position !== direction
+			&& this.distance_shifted === 0)
 	}
 	
 	shift(){
