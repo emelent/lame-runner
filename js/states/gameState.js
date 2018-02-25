@@ -4,6 +4,7 @@ lame.GameState = class GameState{
 
 	init(levelData){
 		this.levelData = levelData
+		this.score = 0
 	}
 
 	create(){
@@ -16,8 +17,12 @@ lame.GameState = class GameState{
 		this.createGroups()
 
 		this.road_width = 150
-		this.obstacle_speed = 300
+		this.obstacle_speed = 200
+		this.stripe_speed = 200
 
+		this.counter = setInterval(() => {
+			this.score++
+		}, 1000)
 		this.createSideWalk()
 		this.createStripes()
 		this.createObstacles()
@@ -243,6 +248,13 @@ lame.GameState = class GameState{
 
 	gameOver(){
 		console.log('Game over')
-		this.restartLevel()
+		clearInterval(this.counter)
+		this.levelData.score = this.score
+		this.game.state.start(
+			'menuState',
+			true, 
+			false, 
+			this.levelData
+		)		
 	}
 }

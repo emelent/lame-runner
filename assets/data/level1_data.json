@@ -1,5 +1,6 @@
 {
 	"name": "level1",
+	"score": 0,
 	"groups":[
 		"background",
 		"items",

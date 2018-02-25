@@ -31,7 +31,7 @@ lame.LoadState = class LoadState{
 
 	create(){
 		this.state.start(
-			'gameState', 
+			'menuState', 
 			true,
 			false,
 			this.level_data
