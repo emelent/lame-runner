@@ -7,10 +7,19 @@ class Stripe extends Entity{
 		this.BOTTOM_Y  = this.game.world.height
 		this.INIT_Y = props.init_y
 		this.DIRECTION = props.direction
+		this.isMoving = true
+	}
+
+	stopMoving(){
+		this.isMoving = false
+		this.body.velocity.y = 0
 	}
 
 	update(){
-		this.body.velocity.y = this.context.stripe_speed * this.DIRECTION
+		if(this.isMoving){
+			this.body.velocity.y = this.context.stripe_speed * this.DIRECTION
+		}
+
 		if(this.body.position.y <= this.TOP_Y ||
 			this.body.position.y >= this.BOTTOM_Y
 		){

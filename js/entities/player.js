@@ -56,7 +56,6 @@ class Player extends Entity{
 	}
 
 	hitTrap(player, trap){
-		this.animations.stop()
 		this.context.gameOver()
 		trap.kill()
 	}

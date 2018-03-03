@@ -5,6 +5,7 @@ lame.GameState = class GameState{
 	init(levelData){
 		this.levelData = levelData
 		this.score = 0
+		this.isGameOver = false
 	}
 
 	create(){
@@ -30,9 +31,21 @@ lame.GameState = class GameState{
 		this.createItems()
 		this.createPlayers()
 		this.createCover()
+
+		let style = {
+			font: '30px Arial',
+			fill: '#fff',
+			align: 'center'
+		}
+		this.scoreText = this.game.add.text(
+			this.game.width/2, this.game.height / 2 - 20,
+			'Score: 0', 
+			style
+		)
 	}
 
 	update(){
+		this.scoreText.text = 'Score: ' + this.score
 		if(this.player1.distance_shifted === 0){
 			if(this.cursors.left.isDown && this.player1.canShift(1)){
 				this.player1.shift_direction = 1
@@ -73,7 +86,7 @@ lame.GameState = class GameState{
 		}
 
 		let obs2 = obs1.map(x => x * -1)
-		if(Math.random() > 0.25){ // don't mirror 
+		if(Math.random() > 0){ // don't mirror 
 			if(obs2.length === 2){// go one less
 				obs2.pop()
 			}else{ // go one more
@@ -92,6 +105,9 @@ lame.GameState = class GameState{
 	}
 	
 	nextObstacles(){
+		if(this.isGameOver)
+			return
+	
 		this.obstacles.forEach(obs => obs.hide())
 		const {obs1, obs2} = this.generateObstacles()
 		
@@ -190,6 +206,12 @@ lame.GameState = class GameState{
 				y: init_y + (gap * i)
 			}, Object.assign({}, props, {direction: 1})))
 		}
+
+		this.stripes = stripes;
+	}
+
+	stopStripes(){
+		this.stripes.forEach(stripe => stripe.stopMoving())
 	}
 
 	createSideWalk(){
@@ -212,14 +234,20 @@ lame.GameState = class GameState{
 	}
 
 	gameOver(){
-		console.log('Game over')
+		this.isGameOver = true
 		clearInterval(this.counter)
 		this.levelData.score = this.score
-		this.game.state.start(
-			'menuState',
-			true, 
-			false, 
-			this.levelData
-		)		
+		this.player1.animations.stop();
+		this.player2.animations.stop();
+		this.stopStripes()
+		
+		setTimeout(() => {
+			this.game.state.start(
+				'menuState',
+				true, 
+				false, 
+				this.levelData
+			)		
+		}, 2000)
 	}
 }
