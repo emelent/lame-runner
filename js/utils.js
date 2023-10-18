@@ -2,7 +2,7 @@
  * Select a random value from an array.
  * @param {Array} arr - Array
  */
-const pickRandom = arr => arr[Math.floor(Math.random() * arr.length)]
+const pickRandom = arr => arr[randomInteger(0, arr.length)]
 
 /**
  * Returns a random integer within the mathematical scope [min, max)
