@@ -12,7 +12,7 @@ lame.GameState = class GameState{
 
 		// activate physics
 		this.game.physics.startSystem(Phaser.Physics.ARCADE)
-		
+
 		this.cursors = this.game.input.keyboard.createCursorKeys()
 
 		this.createGroups()
@@ -39,7 +39,7 @@ lame.GameState = class GameState{
 		}
 		this.scoreText = this.game.add.text(
 			this.game.width/2, this.game.height / 2 - 20,
-			'Score: 0', 
+			'Score: 0',
 			style
 		)
 	}
@@ -86,7 +86,7 @@ lame.GameState = class GameState{
 		}
 
 		let obs2 = obs1.map(x => x * -1)
-		if(Math.random() > 0){ // don't mirror 
+		if(Math.random() > 0){ // don't mirror
 			if(obs2.length === 2){// go one less
 				obs2.pop()
 			}else{ // go one more
@@ -103,20 +103,20 @@ lame.GameState = class GameState{
 		obs2 = obs2.map(v => x + (delta * v))
 		return {obs1, obs2}
 	}
-	
+
 	nextObstacles(){
 		if(this.isGameOver)
 			return
-	
+
 		this.obstacles.forEach(obs => obs.hide())
 		const {obs1, obs2} = this.generateObstacles()
-		
-		obs1.forEach((x, i) => 
+
+		obs1.forEach((x, i) =>
 			this.obstacles[i].activate(x, -1, this.obstacle_speed)
 		)
-		
+
 		let idx = obs1.length
-		obs2.forEach((x, i) => 
+		obs2.forEach((x, i) =>
 			this.obstacles[idx + i].activate(x, 1, this.obstacle_speed)
 		)
 	}
@@ -226,7 +226,7 @@ lame.GameState = class GameState{
 	}
 	createItems(){
 		this.items = []
-		
+
 	}
 
 	restartLevel(){
@@ -240,14 +240,14 @@ lame.GameState = class GameState{
 		this.player1.animations.stop();
 		this.player2.animations.stop();
 		this.stopStripes()
-		
+
 		setTimeout(() => {
 			this.game.state.start(
 				'menuState',
-				true, 
-				false, 
+				true,
+				false,
 				this.levelData
-			)		
+			)
 		}, 2000)
 	}
 }

@@ -8,8 +8,10 @@ lame.MenuState = class MenuState{
 	}
 
 	create(){
+		this.cursors = this.game.input.keyboard.createCursorKeys()
+
 		// start game text
-		let text = 'Tap to begin'
+		let text = 'Tap or press down/up arrow to begin'
 		let style = {
 			font: '30px Arial',
 			fill: '#fff',
@@ -17,7 +19,7 @@ lame.MenuState = class MenuState{
 		}
 		const t = this.game.add.text(
 			this.game.width/2, this.game.height / 2,
-			text, 
+			text,
 			style
 		)
 		t.anchor.set(0.5)
@@ -39,11 +41,14 @@ lame.MenuState = class MenuState{
 	}
 
 	update(){
-		if(this.game.input.activePointer.justPressed()){
+		if(this.game.input.activePointer.justPressed() ||
+			this.cursors.down.justPressed() ||
+			this.cursors.up.justPressed()
+		){
 			this.game.state.start(
 				'gameState',
-				true, 
-				false, 
+				true,
+				false,
 				this.levelData
 			)
 		}
